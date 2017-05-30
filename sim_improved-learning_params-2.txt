@@ -1,0 +1,12 @@
+learning = True <type 'bool'>
+alpha = 0.1 <type 'float'>
+epsilon = 1.0 <type 'float'>
+enforce_deadline = True <type 'bool'>
+update_delay = 0.01 <type 'float'>
+display = False <type 'bool'>
+log_metrics = True <type 'bool'>
+optimized = True <type 'bool'>
+n_test = 20 <type 'int'>
+tolerance = 0.01 <type 'float'>
+decay_fx = oneovertp2 <type 'str'>
+params_output = sim_improved-learning_params-2.txt <type 'str'>
