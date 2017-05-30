@@ -39,6 +39,8 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Set any additional class parameters as needed
+        
+        #Keep track of current training trial
         self.trial_num = 0.0
         
         random.seed(888) 
@@ -63,7 +65,6 @@ class LearningAgent(Agent):
             self.epsilon = 0.0
             self.alpha = 0.0
         else:
-            #bad actions, major violation, major accident, rolling avg reward per action, reliability
             self.trial_num += 1.0
             
             if args_dict["decay_fx"] == "initial":
@@ -74,21 +75,10 @@ class LearningAgent(Agent):
                 self.epsilon = math.exp(-self.alpha * self.trial_num)
             elif args_dict["decay_fx"] == "cosat":
                 self.epsilon = math.cos(self.alpha * self.trial_num)
+            elif args_dict["decay_fx"] == "abscosat":
+                self.epsilon = math.fabs(math.cos(self.alpha * self.trial_num))
             else:
                 self.epsilon = 0.0
-            #self.epsilon = 1 / (self.trial_num ** 2)
-            
-            #0.001, 0.001, 0.001, 1.5, 80 peak 90
-            #alpha=0.01, epsilon=1.0, tolerance=0.01
-            
-            #0.035, 0.0212, 0.01, 0.9, 40 peak 90
-            #alpha=0.05, epsilon=1.0, tolerance=0.01
-            
-            
-            #0.1711, 0.1283, 0.0428, -1.8, 40 peak 40
-            #alpha=0.05, epsilon=1.0, tolerance=0.01
-            #
-        
 
         return None
 
@@ -106,7 +96,7 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Set 'state' as a tuple of relevant data for the agent
-        state = (inputs["light"], inputs["oncoming"], inputs["left"], inputs["right"], waypoint)
+        state = (inputs["light"], inputs["oncoming"], inputs["left"], waypoint)
 
         return state
 
