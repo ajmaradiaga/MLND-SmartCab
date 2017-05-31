@@ -35,9 +35,6 @@ class LearningAgent(Agent):
         self.epsilon = epsilon   # Random exploration factor
         self.alpha = alpha       # Learning factor
 
-        ###########
-        ## TO DO ##
-        ###########
         # Set any additional class parameters as needed
         
         #Keep track of current training trial
@@ -54,9 +51,6 @@ class LearningAgent(Agent):
         # Select the destination as the new location to route to
         self.planner.route_to(destination)
         
-        ########### 
-        ## TO DO ##
-        ###########
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
@@ -92,9 +86,6 @@ class LearningAgent(Agent):
         inputs = self.env.sense(self)           # Visual input - intersection light and traffic
         deadline = self.env.get_deadline(self)  # Remaining deadline
 
-        ########### 
-        ## TO DO ##
-        ###########
         # Set 'state' as a tuple of relevant data for the agent
         state = (inputs["light"], inputs["oncoming"], inputs["left"], waypoint)
 
@@ -105,9 +96,6 @@ class LearningAgent(Agent):
         """ The get_max_Q function is called when the agent is asked to find the
             maximum Q-value of all actions based on the 'state' the smartcab is in. """
 
-        ########### 
-        ## TO DO ##
-        ###########
         # Calculate the maximum Q-value of all actions for a given state
         maxQ = -8888.8
         q_state = self.Q[state]
@@ -142,9 +130,6 @@ class LearningAgent(Agent):
         self.state = state
         self.next_waypoint = self.planner.next_waypoint()
         
-        ########### 
-        ## TO DO ##
-        ###########
         # When not learning, choose a random action
         # When learning, choose a random action with 'epsilon' probability
         #   Otherwise, choose an action with the highest Q-value for the current state
@@ -167,13 +152,10 @@ class LearningAgent(Agent):
             receives an award. This function does not consider future rewards 
             when conducting learning. """
 
-        ########### 
-        ## TO DO ##
-        ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         if self.learning == True:
-            self.Q[state][action] += (self.alpha * reward)
+            self.Q[state][action] += self.alpha * (reward - self.Q[state][action])
 
         return
 
